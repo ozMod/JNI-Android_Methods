@@ -1,9 +1,13 @@
 //
 // Created by ozMod on 05.10.2021.
 //
-#include <cstdlib>
 
+
+
+#include <cstdlib>
 using namespace std;
+
+
 jobject getTypefaceFromAssets(JNIEnv*env, jobject ctx, const char * name){
     jclass typeface = env->FindClass (OBFUSCATE("android/graphics/Typeface"));
     jmethodID methodCreateFromAsset = env->GetStaticMethodID(typeface, OBFUSCATE("createFromAsset") ,
