@@ -80,23 +80,29 @@ struct {
     }
 } Bitmap;
 struct{
+    
     float min(float a, float b){
           return ((a < b) ? a : b);
     }
-    int round(float a){
-        float x = a;
-        int y = (int)(x + 0.5f);
-        int yNeg = (int)(x - 0.5f);
-        return x < 0 ? yNeg : y;
+    
+    float max(float a, float b){
+          return ((a > b) ? a : b);
     }
+    
+    float avg(float a, float b){
+          return ((a > b) ? b + ((a - b) / 2) : a + ((b - a) / 2));
+    }
+    
+    int round(float a){
+        int y = (int)(a + 0.5f);
+        int yNeg = (int)(a - 0.5f);
+        return a < 0 ? yNeg : y;
+    }
+    
 }Math;
 struct {
-
-//Credit: Octowolve
     void Make(JNIEnv *env, jobject thiz, const char *text, int length) {
-        //Add our toast in here so it wont be easy to change by simply editing the smali and cant
-        //be cut out because this method is needed to start the hack (Octowolve is smart)
-        jstring jstr = env->NewStringUTF(text); //Edit this text to your desired toast message!
+        jstring jstr = env->NewStringUTF(text);
         jclass toast = env->FindClass(OBFUSCATE("android/widget/Toast"));
         jmethodID methodMakeText =
                 env->GetStaticMethodID(
@@ -108,8 +114,7 @@ struct {
 
             return;
         }
-        //The last int is the length on how long the toast should be displayed
-        //0 = Short, 1 = Long
+      
         jobject toastobj = env->CallStaticObjectMethod(toast, methodMakeText,
                                                        thiz, jstr, length);
 
