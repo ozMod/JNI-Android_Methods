@@ -20,14 +20,6 @@ jobject getTypefaceFromAssets(JNIEnv*env, jobject ctx, const char * name){
 
     return _type;
 }
-struct {
-    jobject getInstance(JNIEnv*env){
-         jclass  nxt =  env->FindClass (OBFUSCATE("ru/ozMod/modmenu/NoxTeamOverlay"));
-         jmethodID jmi = env->GetStaticMethodID(nxt , OBFUSCATE("getInstance"), OBFUSCATE("()Landroid/view/View;"));
-         return  env->CallStaticObjectMethod(nxt, jmi);
-    }
-
-} NoxTeamOverlay;
 
 struct {
     jbyteArray decode(JNIEnv * env, jstring str, int op = 0){
@@ -84,7 +76,6 @@ struct {
     }
 } Bitmap;
 struct{
-    
     float min(float a, float b){
           return ((a < b) ? a : b);
     }
@@ -101,8 +92,7 @@ struct{
         int y = (int)(a + 0.5f);
         int yNeg = (int)(a - 0.5f);
         return a < 0 ? yNeg : y;
-    }
-    
+    }  
 }Math;
 struct {
     void Make(JNIEnv *env, jobject thiz, const char *text, int length) {
@@ -184,17 +174,6 @@ struct {
          env->CallVoidMethod(i, gwmid, dm);
     }
 } Display;
-struct {
-    jobject ctx(JNIEnv*env){
-        jclass  nxt =  env->FindClass (OBFUSCATE("ru/ozMod/modmenu/MainActivity"));
-        jfieldID c = env->GetStaticFieldID(nxt, OBFUSCATE("ctx"), OBFUSCATE("Landroid/app/Activity;"));
-        jobject t = env->GetStaticObjectField(nxt, c);
-        jobject x = env->NewGlobalRef(t);
-        return x;
-    }
-
-
-} MainActivity;
 struct{
     struct {
        static jobject STROKE(JNIEnv*env){
